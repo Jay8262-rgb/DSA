@@ -1,1 +1,64 @@
+class Solution {
+    public String longestPalindrome(String s) {
+        StringBuilder longest_val = new StringBuilder();
+        StringBuilder reverse_val = new StringBuilder();      
+        StringBuilder result_val = new StringBuilder();      
+               
+        for(int i = 0; i < s.length(); i++){
+            longest_val.setLength(0);
+            reverse_val.setLength(0);
 
+            if(s.length() - 1 > 1){
+
+                longest_val.append(s);
+                reverse_val = new StringBuilder(longest_val);
+                reverse_val.reverse();
+
+                if(reverse_val.toString().equals(longest_val.toString())){
+                    result_val.append(reverse_val);
+                    break;
+                }else{
+                    for(int j = s.length() - 1; i <= j; j--){
+
+                        longest_val.setLength(0);
+                        reverse_val.setLength(0);
+                        longest_val.append(s.substring(i, j + 1));
+                        reverse_val = new StringBuilder(longest_val);
+                        reverse_val.reverse();
+
+                        if(reverse_val.toString().equals(longest_val.toString())){
+                            if(result_val.toString().length() < reverse_val.toString().length()){
+                                result_val.setLength(0);
+                                result_val.append(reverse_val);     
+                            }
+                        }
+                    }
+                    
+                }
+   
+            }else if(s.length() - 1 == 1){
+                for(int k = s.length() - 1; i <= k; k-- ){
+                    longest_val.setLength(0);
+                    longest_val.append(s.substring(i, k+1));
+                    reverse_val = new StringBuilder(longest_val);
+                    reverse_val.reverse();
+                    if(reverse_val.toString().equals(longest_val.toString())){
+                        if(result_val.toString().length() < reverse_val.toString().length()){
+                            result_val.append(reverse_val);                        
+                        }
+                    }
+                }
+            }else{
+                longest_val.append(s);
+                reverse_val = new StringBuilder(longest_val);
+                reverse_val.reverse();
+                result_val.append(reverse_val);
+            }
+                
+        }
+        
+        String result = result_val.toString();
+        return result;
+        
+    }
+}

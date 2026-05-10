@@ -1,42 +1,31 @@
 class Solution {
+    int max = 0, start=0,end=0;
+    public boolean Palindrome(String s, int i, int j){
+        while(i < j ){
+            char ch1 = s.charAt(i);
+            char ch2 = s.charAt(j);
+
+            if(ch1 != ch2){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
     public String longestPalindrome(String s) {
-        StringBuilder longest_val = new StringBuilder();
-        StringBuilder reverse_val = new StringBuilder();      
-        StringBuilder result_val = new StringBuilder();      
-               
-        for(int i = 0; i < s.length(); i++){
-            longest_val.setLength(0);
-            reverse_val.setLength(0);
-
-            longest_val.append(s);
-            reverse_val = new StringBuilder(longest_val);
-            reverse_val.reverse();
-
-            if(reverse_val.toString().equals(longest_val.toString())){
-                result_val.append(reverse_val);
-                break;
-            }else{
-                for(int j = s.length() - 1; i <= j; j--){
-
-                    longest_val.setLength(0);
-                    reverse_val.setLength(0);
-                    longest_val.append(s.substring(i, j + 1));
-                    reverse_val = new StringBuilder(longest_val);
-                    reverse_val.reverse();
-
-                    if(reverse_val.toString().equals(longest_val.toString())){
-                        if(result_val.toString().length() < reverse_val.toString().length()){
-                            result_val.setLength(0);
-                            result_val.append(reverse_val);     
-                        }
+        int n = s.length();
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                if(Palindrome(s, i, j) == true){
+                    if((j-i+1) > max){
+                        max = j - i + 1;
+                        start = i;
+                        end = j;
                     }
                 }
-                
-            }                
+            }
         }
-        
-        String result = result_val.toString();
-        return result;
-        
+        return s.substring(start, end+1);
     }
 }

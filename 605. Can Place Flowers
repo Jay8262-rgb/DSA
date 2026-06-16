@@ -1,0 +1,38 @@
+# The leetcode problem solution is <b> Can Place Flowers <b/>  <b> problem no is 605. <b/> 
+
+
+class Solution {
+    public boolean place(int[] f, int idx){
+        int las_v = f.length - 1;
+        int sm_len = f.length - 1;
+        if(idx == 0){
+            if(sm_len == 0)return true;
+            if(sm_len != 0){
+                if(f[++idx] == 0) return true;
+            }
+            
+            return false;
+        }
+        if(las_v == idx){
+            if(f[--idx] == 0)return true;
+            return false;
+        }
+
+        if(0 < idx && idx < las_v){
+            if(f[idx+1] == 0 && f[idx-1] == 0)return true;
+        }
+        return false;
+    }
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+        int len = flowerbed.length;
+        if(n==0)return true;
+        for(int i  = 0; i < len; i++){
+            if(flowerbed[i] == 0 && place(flowerbed, i)){
+                flowerbed[i] = 1;
+                n--;
+                if(n == 0) return true;
+            }
+        }
+        return false;
+    }
+}

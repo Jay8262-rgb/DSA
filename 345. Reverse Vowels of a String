@@ -3,7 +3,7 @@
 
 class Solution {
     private boolean isVowel(char ch) {
-        return "aeiouAEIOU".indexOf(ch) != -1;
+        return "aeiouAEIOU".indexOf(ch) != -1; // this method i used to managing time without this not work perfectly show time limit excedded
     }
     public String reverseVowels(String s) {
         int n = s.length() - 1;
